@@ -1,0 +1,49 @@
+
+<!-- saved from url=(0121)https://app.maker.co/embeds/enhance/8361/perms_shell?url=d3d3LmVzc2VudGlhbC5jb20lMkZkZXZlbG9wZXIlMkZjdXJyZW50LWJ1aWxkcw== -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script>
+  (function() {
+    var getCookie;
+  
+    getCookie = function(name) {
+      var parts, value;
+      value = "; " + document.cookie;
+      parts = value.split("; " + name + "=");
+      if (parts.length === 2) {
+        return parts.pop().split(";").shift();
+      }
+    };
+  
+    // fetch header on social story permalink pages
+    var show_right_nav = function() {
+      var header_top = document.getElementById('top'),
+        right_header_top;
+  
+      if (header_top) {
+        right_header_top = header_top.getElementsByClassName('navbar-right')[0];
+        right_header_top.classList.remove('hide');
+      }
+    }
+  
+    if (getCookie('signed_in')) {
+      var enhance_perms_url = "https://app.maker.co/api/enhance/8361/perms?url=d3d3LmVzc2VudGlhbC5jb20lMkZkZXZlbG9wZXIlMkZjdXJyZW50LWJ1aWxkcw%3D%3D";
+  
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', enhance_perms_url, true);
+      xhr.send(null);
+  
+      xhr.onreadystatechange = function () {
+        var DONE = 4; // readyState 4 means the request is done.
+        var OK = 200; // status 200 is a successful return.
+        if (xhr.readyState === DONE) {
+          if (xhr.status === OK) {
+            parsedResponse = JSON.parse(xhr.responseText);
+            if (window && window.parent && parsedResponse === true) {
+              window.parent.postMessage('allowMakerEnhanceInspector', '*');
+            }
+          }
+        }
+      };
+    }
+  }).call(this);
+</script>
+</head><body></body></html>
